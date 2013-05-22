@@ -41,42 +41,52 @@ function format_count($count)
 	}
 }
 
-
 ?>
+<div class="parent">
 
-<div class="btn-social">
-	<div class="count count-fb"><i></i><u></u><?php echo format_count($facebook_data->likes) ?></div>
-	<div class="fb-like-wrap">
-		<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FVoucherCodes.co.uk&amp;send=false&amp;layout=standard&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden;"></iframe>
+	<div class="sociable clearfix">
+	
+		<div class="btn-social">
+			<div class="count count-fb"><i></i><u></u><?php echo format_count($facebook_data->likes) ?></div>
+			<div class="fb-like-wrap">
+				<img class="btn-fb" alt="Facebook Like" src="img/fb-like-btn.png" />
+				<iframe class="iframe-fb" data-path="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FVoucherCodes.co.uk&amp;send=false&amp;layout=standard&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=35" src="" scrolling="no" frameborder="0" style="border:none; overflow:hidden;"></iframe>		</div>
+		</div>
+		
+		<div class="btn-social">
+			<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count($twitter_data->statuses_count) ?></a></div>
+			<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
+		</div>
+		
+		<div class="btn-social">
+			<div class="count count-gp"><i></i><u></u><?php echo format_count($google_data->plusOneCount) ?></div>
+			<a class="btn-gp" target="_blank" href="https://plus.google.com/share?url=<?php echo urlencode($Share_URL) ?>"><b>+1</b></a>
+		</div>
+		
 	</div>
+	<div class="sociable clearfix">
+		
+		<div class="btn-social-compact">
+			<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
+			<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count($twitter_data->statuses_count) ?></a></div>
+		</div>
+		
+		<div class="btn-social-compact">
+			<a class="btn-gp" target="_blank" href="https://plus.google.com/share?url=<?php echo urlencode($Share_URL) ?>"><b>+1</b></a>
+			<div class="count count-gp"><i></i><u></u><?php echo format_count($google_data->plusOneCount) ?></div>
+		</div>
+		
+		<div class="btn-follow">
+			<a href="https://twitter.com/intent/user?screen_name=<? echo $Twitter_Screen_Name ?>" target="_blank" class="btn-tw"><b>Follow @<? echo $Twitter_Screen_Name ?></b></a>
+		</div>
+		
+	</div>
+
 </div>
 
-<div class="btn-social">
-	<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count($twitter_data->statuses_count) ?></a></div>
-	<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
-</div>
+<script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="scripts/pluginify.js"></script>
+<script type="text/javascript" src="scripts/sociable.js"></script>
 
-<div class="btn-social">
-	<div class="count count-gp"><i></i><u></u><?php echo format_count($google_data->plusOneCount) ?></div>
-	<a class="btn-gp" target="_blank" href="https://plus.google.com/share?url=<?php echo urlencode($Share_URL) ?>"><b>+1</b></a>
-</div>
-
-<div class="btn-social-compact">
-	<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
-	<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count($twitter_data->statuses_count) ?></a></div>
-</div>
-
-<div class="btn-social-compact">
-	<a class="btn-gp" target="_blank" href="https://plus.google.com/share?url=<?php echo urlencode($Share_URL) ?>"><b>+1</b></a>
-	<div class="count count-gp"><i></i><u></u><?php echo format_count($google_data->plusOneCount) ?></div>
-</div>
-
-<!--
-<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FVoucherCodes.co.uk&amp;send=false&amp;layout=button_count&amp;&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
--->
-
-<div class="btn-follow">
-	<a href="https://twitter.com/intent/user?screen_name=<? echo $Twitter_Screen_Name ?>" target="_blank" class="btn-tw"><b>Follow @<? echo $Twitter_Screen_Name ?></b></a>
-</div>
 </body>
 </html>
