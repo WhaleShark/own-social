@@ -21,7 +21,7 @@ $twitter_link = 'http://api.twitter.com/1/users/show.json?screen_name='.$Twitter
 $facebook_like = 'http://graph.facebook.com/'.$Facebook_Name;
 $google_plus_count = 'https://www.googleapis.com/plus/v1/people/'.$Google_Page_Id.'?key='.$Google_API_key.'';
 
-$twitter_data       = get_data($twitter_link);
+$twitter_data       = twitterSucks();
 $facebook_data      = get_data($facebook_like);
 $google_data        = get_data($google_plus_count);
 
@@ -64,7 +64,57 @@ function get_likes($url) {
  
     return intval( $json[$url]['shares'] );
 }
+function twitterSucks() {
+	// kick things off
+	/*$ch = curl_init();
+	 
+	//set the url
+	curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/oauth2/token');
+	 
+	// must be a POST
+	curl_setopt($ch,CURLOPT_POST, true);
+	 
+	// need to post this one variable
+	$data = array();
+	$data['grant_type'] = "client_credentials";
+	curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+	 
+	// set up authorization using keys from twitter app:
+	$consumerKey = '8MhOqnDkwX0uJoj1wVWvBw';
+	$consumerSecret = 'GR9Kt3WmULoq9OdWlIwr9p2cQXf3U5RMbxQvAHagWI';
+	curl_setopt($ch,CURLOPT_USERPWD, $consumerKey . ':' . $consumerSecret);
+	 
+	// set this so we can read the returned information
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+	 
+	//execute post
+	$result = curl_exec($ch);
+	 
+	//close connection
+	curl_close($ch);*/
 
+	//open connection
+	$ch = curl_init();
+
+	//set the url, including your parameters
+	curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/1.1/users/show.json?screen_name=vouchercodesuk');
+
+	// add in the bearer token
+	$bearer = "AAAAAAAAAAAAAAAAAAAAAPzkSQAAAAAAOkiCA%2BWN%2FyqFRiabo8GG98y7ums%3Dx6JcUVzfogONd0DPilATYlxuIfpCx6WKVfxvsVkvA"; 
+	curl_setopt($ch,CURLOPT_HTTPHEADER,array('Authorization: Bearer ' . $bearer));
+
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+
+	//execute request
+	$result = curl_exec($ch);
+
+	//close connection
+	curl_close($ch);
+
+	// Print out the JSON encoded response
+	$json = json_decode($result, true);
+	return intval( $json['followers_count'] );
+}
 ?>
 
 <div class="sociable clearfix">
@@ -78,7 +128,7 @@ function get_likes($url) {
 	</div>
 	
 	<div class="btn-social">
-		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count($twitter_data->statuses_count) ?></a></div>
+		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count(twitterSucks()); ?></a></div>
 		<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
 	</div>
 	
@@ -92,7 +142,7 @@ function get_likes($url) {
 	
 	<div class="btn-social-compact">
 		<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
-		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count($twitter_data->statuses_count) ?></a></div>
+		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count(twitterSucks()); ?></a></div>
 	</div>
 	
 	<div class="btn-social-compact">
@@ -103,8 +153,11 @@ function get_likes($url) {
 	<div class="btn-follow">
 		<a href="https://twitter.com/intent/user?screen_name=<? echo $Twitter_Screen_Name ?>" target="_blank" class="btn-tw"><b>Follow @<? echo $Twitter_Screen_Name ?></b></a>
 	</div>
-	
 </div>
+
+<br /><br />
+
+
 
 <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="scripts/pluginify.js"></script>
