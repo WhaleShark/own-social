@@ -151,7 +151,7 @@ function twitterSucks() {
 	</div>
 	
 	<div class="btn-follow">
-		<a href="https://twitter.com/intent/user?screen_name=<? echo $Twitter_Screen_Name ?>" target="_blank" class="btn-tw"><b>Follow @<? echo $Twitter_Screen_Name ?></b></a>
+		<a href="https://twitter.com/intent/follow?original_referer=<? echo urlencode($Share_URL) ?>&amp;region=follow_link&amp;screen_name=<? echo $Twitter_Screen_Name ?>&amp;tw_p=followbutton&amp;variant=2.0" target="_blank" class="btn-tw"><b>Follow @<? echo $Twitter_Screen_Name ?></b></a>
 	</div>
 </div>
 
