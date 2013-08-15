@@ -97,7 +97,8 @@ function twitterSucks() {
 	$ch = curl_init();
 
 	//set the url, including your parameters
-	curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/1.1/users/show.json?screen_name=vouchercodesuk');
+	curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/1.1/search/tweets.json?q=vouchercodes.co.uk%2Ffeatured-voucher-codes.html&count=100');
+	//curl_setopt($ch,CURLOPT_URL, 'https://stream.twitter.com/1.1/statuses/filter.json?track=vouchercodes.co.uk');
 
 	// add in the bearer token
 	$bearer = "AAAAAAAAAAAAAAAAAAAAAPzkSQAAAAAAOkiCA%2BWN%2FyqFRiabo8GG98y7ums%3Dx6JcUVzfogONd0DPilATYlxuIfpCx6WKVfxvsVkvA"; 
@@ -112,8 +113,10 @@ function twitterSucks() {
 	curl_close($ch);
 
 	// Print out the JSON encoded response
-	$json = json_decode($result, true);
-	return intval( $json['followers_count'] );
+	//$json = json_decode($result, true);
+	//return intval( $json['followers_count'] );
+
+	return $result;
 }
 ?>
 
@@ -128,7 +131,7 @@ function twitterSucks() {
 	</div>
 	
 	<div class="btn-social">
-		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count(twitterSucks()); ?></a></div>
+		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"></a></div>
 		<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
 	</div>
 	
@@ -142,7 +145,7 @@ function twitterSucks() {
 	
 	<div class="btn-social-compact">
 		<a class="btn-tw" target="_blank" href="https://twitter.com/intent/tweet?original_referer=<? echo urlencode($Share_URL) ?>&amp;text=<? echo urlencode($Share_Text) ?>&amp;url=<? echo urlencode($Share_URL) ?>"><b>Tweet</b></a>
-		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"><?php echo format_count(twitterSucks()); ?></a></div>
+		<div class="count count-tw"><i></i><u></u><a target="_blank" href="http://twitter.com/search/realtime?q=<? echo $Twitter_Screen_Name ?>"></a></div>
 	</div>
 	
 	<div class="btn-social-compact">
@@ -157,7 +160,7 @@ function twitterSucks() {
 
 <br /><br />
 
-
+<?php echo twitterSucks(); ?>
 
 <script type="text/javascript" src="scripts/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="scripts/pluginify.js"></script>
